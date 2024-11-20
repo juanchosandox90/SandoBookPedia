@@ -10,6 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.sandobookpedia.book.domain.Book
 import com.sandobookpedia.book.presentation.book_list.BookListScreen
 import com.sandobookpedia.book.presentation.book_list.BookListState
+import com.sandobookpedia.book.presentation.book_list.components.BookList
 import com.sandobookpedia.book.presentation.book_list.components.BookListItem
 import com.sandobookpedia.book.presentation.book_list.components.BookSearchBar
 
@@ -43,6 +44,16 @@ private val books = (1..100).map {
         ratingCount = 5,
         numPages = 100,
         numEditions = 3
+    )
+}
+
+@Preview
+@Composable
+private fun BookListPreview(){
+    BookList(
+        books = books,
+        onBookClick = {},
+        modifier = Modifier
     )
 }
 
