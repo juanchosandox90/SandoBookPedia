@@ -10,7 +10,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.sandobookpedia.book.domain.Book
 import com.sandobookpedia.book.presentation.book_list.BookListScreen
 import com.sandobookpedia.book.presentation.book_list.BookListState
-import com.sandobookpedia.book.presentation.book_list.books
 import com.sandobookpedia.book.presentation.book_list.components.BookList
 import com.sandobookpedia.book.presentation.book_list.components.BookListItem
 import com.sandobookpedia.book.presentation.book_list.components.BookSearchBar
@@ -33,9 +32,25 @@ private fun BookSearchBarPreview() {
 }
 
 
+private val books = (1..100).map {
+    Book(
+        id = it.toString(),
+        title = "Book $it",
+        imageUrl = "https://storage.googleapis.com/drive-explorer/4101/0ABQ3r6e4rbrlUk9PVA/Captura%20de%20pantalla%202024-11-19%20a%20la(s)%2010.54.38%E2%80%AFp.m..png",
+        authors = listOf("Philipp Lackner"),
+        description = "Description $it",
+        languages = emptyList(),
+        firstPublishYear = null,
+        averageRating = 4.67854,
+        ratingCount = 5,
+        numPages = 100,
+        numEditions = 3
+    )
+}
+
 @Preview
 @Composable
-private fun BookListPreview(){
+private fun BookListPreview() {
     BookList(
         books = books,
         onBookClick = {},
@@ -45,12 +60,12 @@ private fun BookListPreview(){
 
 @Preview
 @Composable
-private fun BookListItemPreview(){
-   BookListItem(
-       book = books.first(),
-       onClick = {},
-         modifier = Modifier
-   )
+private fun BookListItemPreview() {
+    BookListItem(
+        book = books.first(),
+        onClick = {},
+        modifier = Modifier
+    )
 }
 
 @Preview
