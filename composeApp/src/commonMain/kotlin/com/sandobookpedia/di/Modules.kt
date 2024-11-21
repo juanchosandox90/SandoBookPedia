@@ -5,6 +5,7 @@ import com.sandobookpedia.book.data.network.KtorRemoteBookDataSource
 import com.sandobookpedia.book.data.network.RemoteBookDataSource
 import com.sandobookpedia.book.domain.BookRepository
 import com.sandobookpedia.book.presentation.SelectedBookViewModel
+import com.sandobookpedia.book.presentation.book_detail.BookDetailViewModel
 import com.sandobookpedia.book.presentation.book_list.BookListViewModel
 import com.sandobookpedia.core.data.HttpClientFactory
 import org.koin.core.module.Module
@@ -21,6 +22,6 @@ val sharedModule = module {
     singleOf(::DefaultBookRepository).bind<BookRepository>()
 
     viewModelOf(::BookListViewModel)
+    viewModelOf(::BookDetailViewModel)
     viewModelOf(::SelectedBookViewModel)
-
 }
