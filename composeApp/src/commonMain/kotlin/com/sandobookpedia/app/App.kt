@@ -21,6 +21,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.sandobookpedia.book.presentation.SelectedBookViewModel
+import com.sandobookpedia.book.presentation.book_detail.BookDetailAction
+import com.sandobookpedia.book.presentation.book_detail.BookDetailScreenRoot
+import com.sandobookpedia.book.presentation.book_detail.BookDetailViewModel
 import com.sandobookpedia.book.presentation.book_list.BookListScreenRot
 import com.sandobookpedia.book.presentation.book_list.BookListViewModel
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -62,15 +65,21 @@ fun App() {
 
                     val selectedBookViewModel =
                         it.sharedKoinViewModel<SelectedBookViewModel>(navController)
+                    val viewModel = koinViewModel<BookDetailViewModel>()
                     val selectedBook by selectedBookViewModel.selectedBook.collectAsStateWithLifecycle()
 
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-
-                        Text(text = "Book Detail Screen! The ID is: $selectedBook")
+                    LaunchedEffect(selectedBook) {
+                        selectedBook?.let {
+                            viewModel.onAction(BookDetailAction.OnSelectedBookChanged(it))
+                        }
                     }
+
+                    BookDetailScreenRoot(
+                        viewModel = viewModel,
+                        onBackClick = {
+                            navController.navigateUp()
+                        }
+                    )
                 }
             }
         }
