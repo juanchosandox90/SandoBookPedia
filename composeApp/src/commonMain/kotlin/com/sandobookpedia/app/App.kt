@@ -61,8 +61,18 @@ fun App() {
                         }
                     )
                 }
-                composable<Route.BookDetail> {
-
+                composable<Route.BookDetail>(
+                    enterTransition = {
+                        slideInHorizontally { initialOffset ->
+                            initialOffset
+                        }
+                    },
+                    exitTransition = {
+                        slideOutHorizontally { initialOffset ->
+                            initialOffset
+                        }
+                    }
+                ) {
                     val selectedBookViewModel =
                         it.sharedKoinViewModel<SelectedBookViewModel>(navController)
                     val viewModel = koinViewModel<BookDetailViewModel>()
