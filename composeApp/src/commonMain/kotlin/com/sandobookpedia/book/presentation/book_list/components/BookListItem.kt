@@ -42,6 +42,7 @@ import coil3.compose.AsyncImagePainter
 import coil3.compose.rememberAsyncImagePainter
 import com.sandobookpedia.book.domain.Book
 import com.sandobookpedia.core.presentation.LightBlue
+import com.sandobookpedia.core.presentation.PulseAnimation
 import com.sandobookpedia.core.presentation.SandYellow
 import org.jetbrains.compose.resources.painterResource
 import sandobookpedia.composeapp.generated.resources.Res
@@ -93,18 +94,20 @@ fun BookListItem(
                     }
                 )
 
-                /*   val painterState by painter.state.collectAsStateWithLifecycle()
-                   val transition by animateFloatAsState(
-                       targetValue = if (painterState is AsyncImagePainter.State.Success) {
-                           1f
-                       } else {
-                          0f
-                       },
-                       animationSpec = tween(durationMillis = 800)
-                   )*/
+                val painterState by painter.state.collectAsStateWithLifecycle()
+                val transition by animateFloatAsState(
+                    targetValue = if (painterState is AsyncImagePainter.State.Success) {
+                        1f
+                    } else {
+                        0f
+                    },
+                    animationSpec = tween(durationMillis = 800)
+                )
 
                 when (val result = imageLoadResult) {
-                    null -> CircularProgressIndicator()
+                    null -> PulseAnimation(
+                        modifier = Modifier.size(60.dp)
+                    )
                     else -> {
                         Image(
                             painter = if (result.isSuccess) painter else {
@@ -121,12 +124,12 @@ fun BookListItem(
                                     ratio = 0.65f,
                                     matchHeightConstraintsFirst = true
                                 )
-                            /*                                .graphicsLayer {
-                                                                rotationX = (1f - transition)*30f
-                                                                val scale = 0.8f + (0.2f * transition)
-                                                                scaleX = scale
-                                                                scaleY = scaleX
-                                                            }*/
+                                .graphicsLayer {
+                                    rotationX = (1f - transition) * 30f
+                                    val scale = 0.8f + (0.2f * transition)
+                                    scaleX = scale
+                                    scaleY = scaleX
+                                }
                         )
                     }
                 }

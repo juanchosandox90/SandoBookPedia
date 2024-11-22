@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -39,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.rememberAsyncImagePainter
 import com.sandobookpedia.core.presentation.DarkBlue
 import com.sandobookpedia.core.presentation.DesertWhite
+import com.sandobookpedia.core.presentation.PulseAnimation
 import com.sandobookpedia.core.presentation.SandYellow
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -142,7 +144,9 @@ fun BlurredImageBackground(
                             modifier = Modifier.fillMaxSize(),
                             contentAlignment = Alignment.Center
                         ) {
-                            CircularProgressIndicator() // PulseAnimation
+                            PulseAnimation(
+                                modifier = Modifier.size(60.dp)
+                            )
                         }
 
                         else -> {
